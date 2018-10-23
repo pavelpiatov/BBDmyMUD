@@ -8,6 +8,9 @@ public class Parser {
         this.gm = gm;
     }
     
+    public String parse(String string){
+        return string;
+    }
     
     
 }
