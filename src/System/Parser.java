@@ -8,9 +8,22 @@ public class Parser {
         this.gm = gm;
     }
     
-    public String parse(String string){
-        return string;
+    public String[] parse(String string){
+        String[] wordsArray = string.trim().replaceAll("\\s{2,}", " ").split(" ");
+        
+        int i = 0;
+        for (String s : wordsArray){
+            System.out.println( ++i + " " + s);
+        }
+        
+        return wordsArray;
     }
     
     
 }
+
+
+
+
+
+
