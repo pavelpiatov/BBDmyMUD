@@ -45,6 +45,7 @@ public class Room extends Entity {
         lookAroundTheRoom.append(description);
         lookAroundTheRoom.append(String.format(" (%d,%d).", x, y));
         lookAroundTheRoom.append(doorDescription());
+        lookAroundTheRoom.append(contentsDescription());
         return lookAroundTheRoom.toString();
     }
 
@@ -69,7 +70,23 @@ public class Room extends Entity {
         }
         return doorDescription.toString();
     }
+    
+    //TODO IDEA - move all SOUTing to GameMaster, make a function that takes care of punctuation.
 
+    private String contentsDescription() {
+        if (contents.isEmpty()){
+            return "The room is void of content. ";
+        } else {
+            StringBuilder contentsDescription = new StringBuilder();
+            contentsDescription.append("The room contains: ");
+            for (RoomObject object : contents){
+                contentsDescription.append(object.getDescription() + ", ");
+            }
+            int lastComma = contentsDescription.lastIndexOf(", ");
+            contentsDescription.replace(lastComma, lastComma+2 , ". ");
+            return contentsDescription.toString();
+        }
+    }
     
     public void addPlayer(Player player){
         System.out.println("Add player:");
@@ -164,8 +181,9 @@ public class Room extends Entity {
     
     @Override
     public String toString(){
-        return new StringBuilder().append("room " + x + ":" + y +" ").toString();
+        return new StringBuilder().append("room (" + x + "," + y +") ").toString();
     }
+
 
 
 

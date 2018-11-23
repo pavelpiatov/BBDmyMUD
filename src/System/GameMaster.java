@@ -7,6 +7,7 @@ import GameObjects.TheRoom;
 import entities.Door;
 import entities.Player;
 import entities.Room;
+import entities.RoomObject;
 import java.util.Scanner;
 
 public class GameMaster {
@@ -27,6 +28,11 @@ public class GameMaster {
         
         Room firstRoom = new Room(20, 533);
         Room secondRoom = new Room(20, 534);
+        RoomObject trinket1 = new RoomObject(secondRoom, 1);
+        RoomObject trinket2 = new RoomObject(secondRoom, 2);
+        secondRoom.add(trinket1);
+        secondRoom.add(trinket2);
+        
         Door doorFirstToSecond = new Door(firstRoom, secondRoom);
         firstRoom.setDoorN(doorFirstToSecond);
         secondRoom.setDoorS(doorFirstToSecond);
@@ -37,6 +43,7 @@ public class GameMaster {
         
         Thread.sleep(1000);
         
+        //Main Game Loop
         while (true) {
             System.out.println("Your turn");
             userInput = userInputScanner.nextLine();
@@ -77,12 +84,19 @@ public class GameMaster {
             case "west":
                 move(player, Direction.WEST);
                 break;
+            case "stats":
+                System.out.println(player.stats());
+                break;
             case "quit":
             case "exit":
                 System.exit(0);
         }
     }
 
+    private void formattedOutput(String string){
+        System.out.println(string);
+    }
+    
     private void look(Player player, String[] inputWords) {
         System.out.println("You look around");
         System.out.println(player.getLocation().lookAroundTheRoom());

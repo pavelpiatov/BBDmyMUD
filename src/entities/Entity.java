@@ -6,6 +6,7 @@ public abstract class Entity {
     protected static String typeName = "entity";
     protected String name;
     protected String description;
+    protected int ingameNumber;
     
     protected Entity(){
         id = 0; 
